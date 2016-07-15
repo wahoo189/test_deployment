@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <title>New User</title>
+</head>
+<body>
+  <div class="container">
+    <ul class="nav navbar-nav">
+      <li class="nav-item"><a href="/">Test App</a></li>
+      <li class="nav-item active"><a href="/dashboard">Dashboard</a></li>
+      <li class="nav-item"><a href="/users/edit/{{User.id}}">Profile</a></li>
+    </ul>
+    <br>
+    <br>
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <h1>Add a new user</h1>
+    <a class="btn btn-primary pull-right" href="/dashboard/admin">Return to Dashboard</a>
+    <form action="/users/create" method="post">
+      {% csrf_token %}
+      <label for="">Email Address:</label><br />
+      <input type="text" name="email"><br />
+      <label for="">First Name:</label><br />
+      <input type="text" name="first_name"><br />
+      <label for="">Last Name:</label><br />
+      <input type="text" name="last_name"><br />
+      <label for="">Password:</label><br />
+      <input type="text" name="password"><br />
+      <label for="">Password Confirmation:</label><br />
+      <input type="text" name="password_confirm"><br /><br />
+      <input type="submit" value="Create">
+    </form>
+  </div>
+</body>
+</html>

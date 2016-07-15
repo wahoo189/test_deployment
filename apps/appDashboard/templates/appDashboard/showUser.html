@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <title>Edit Profile</title>
+</head>
+<body>
+
+  <div class="container">
+    <ul class="nav navbar-nav">
+      <li class="nav-item"><a href="/">Test App</a></li>
+      <li class="nav-item active"><a href="/dashboard">Dashboard</a></li>
+      <li class="nav-item"><a href="/users/edit/{{User.id}}">Profile</a></li>
+    </ul>
+    <br>
+    <br>
+
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    <h2>{{User.first_name}} {{User.last_name}}</h2>
+    <label for="">Registered at:</label> {{User.created_at}}<br />
+    <label for="">User ID:</label> {{User.id}}<br />
+    <label for="">Email Address:</label> {{User.emailAddress}}<br />
+    <label for="">Description:</label> {{User.description}}<br />
+
+    <h3>Leave a message for {{User.first_name}}</h3>
+    <form action="/postMessage" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="id" value="{{User.id}}">
+      <textarea name="message" cols="100" rows="2" class="form-control"></textarea><br />
+      <div class="text-right">
+        <input type="submit" value="Post" class="btn btn-primary">
+      </div>
+    </form>
+
+    {% for message in Messages %}
+    <p>{{message.message}}</p>
+    <form action="/postComment" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="messageId" value="{{message.id}}">
+      <input type="hidden" name="userId" value="{{User.id}}">
+      <textarea name="comment" cols="100" rows="2" class="form-control"></textarea><br />
+      <div class="text-right">
+        <input type="submit" value="Post Comment" class="btn btn-primary">
+      </div>
+    </form>
+    {% for comment in message.comment_set.all %}
+    <p class="col-xs-offset-1">{{comment.comment}}</p>
+    {% endfor %}
+    {% endfor %}
+  </div>
+
+</body>
+</html>

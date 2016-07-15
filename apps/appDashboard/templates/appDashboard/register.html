@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <title>Register</title>
+</head>
+<body>
+  <div class="container">
+
+    <div>
+      <ul class="nav navbar-nav">
+        <li class="nav-item"><a href="/">Test App</a></li>
+        <li class="nav-item active"><a href="/">Home</a></li>
+        <li class="nav-item"><a href="/signin">Login</a></li>
+      </ul>
+    </div>
+    <br>
+    <br>
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <h1>Register</h1>
+    <form action="/doRegister" method="post">
+      {% csrf_token %}
+
+      <div class="row">
+        <div class="col-md-4">
+          <label for="">Email Address:</label><br />
+          <input type="text" name="email"><br />
+          <label for="">First Name:</label><br />
+          <input type="text" name="first_name"><br />
+          <label for="">Last Name:</label><br />
+          <input type="text" name="last_name"><br />
+          <label for="">Password:</label><br />
+          <input type="text" name="password"><br />
+          <label for="">Password Confirmation:</label><br />
+          <input type="text" name="password_confirm"><br />
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-2">
+          <input class="btn pull-right" type="submit" value="Register">
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-3">
+          <a href="/signin">Already have an account? Login</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
