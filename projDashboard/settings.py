@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'projDashboard.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'Dashboard',
+        'NAME': 'dashboard',
         'USER': 'dbninja',
         'PASSWORD': 'C0dingDoj0',
         'HOST': 'localhost',
