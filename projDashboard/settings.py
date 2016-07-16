@@ -80,7 +80,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'Dashboard',
-        'USER': 'DBNinja',
+        'USER': 'dbninja',
         'PASSWORD': 'C0dingDoj0',
         'HOST': 'localhost',
         'PORT': '',
